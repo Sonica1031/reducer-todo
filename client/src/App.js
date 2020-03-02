@@ -15,13 +15,24 @@ const onChange = (e) =>{
 }
 const onClickButton = (e) =>{
 e.preventDefault();
-setShowing([showing, <Showing title={value}/>])
+setShowing([showing, <Showing title={value} onClick={onClick}/>])
 return showing;
 }
   const onClick = (e) =>{
       e.preventDefault();
-       dispatch({ completed: "CHANGE_CLASS"})
+      setShowing(showing.map(item =>{
+       if(e.target.id === item.id){
+        dispatch({item : "CHANGE_CLASS"})
+        console.log(item)
+        return item
       }
+    }))
+    }
+
+  // function onSub(e){
+  //   e.preventDefault();
+  //   setShowing(showing.filter(item =>item.completed = true))
+  //   } 
 
   return (
     <div className="App">
@@ -30,9 +41,9 @@ return showing;
       <input onChange={onChange} type="text" placeholder = "Add To Your To Do List Here" />
       <h1></h1>
       <button onClick={onClickButton}>Add</button>
-      <button onClick={onSub}>Remove</button>
+      <button>Remove</button>
       </form>
-      <div onCLick={onClick}>
+      <div>
         {showing}
       </div>
     </div>
